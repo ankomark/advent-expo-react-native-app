@@ -4,9 +4,11 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = ' http://192.168.31.138:8000/api/songs'; 
-export const BASE_URL = ' http://192.168.31.138:8000/api';
-export const BASE_URI = ' http://192.168.31.138:8000/';
+const API_URL = 'http://192.168.230.138:8000/api/songs'; 
+export const BASE_URL = 'http://192.168.230.138:8000/api';
+export const BASE_URI = 'http://192.168.230.138:8000/';
+export const API_BASE = 'http://192.168.230.138:8000';
+
 
 // Function to get the token from AsyncStorage
 const getAuthToken = async () => {
@@ -23,7 +25,7 @@ const refreshAuthToken = async () => {
     }
 
     try {
-        const response = await axios.post(`${API_URL}/auth/token/refresh/`, {
+        const response = await axios.post(`${API_BASE}/api/auth/token/refresh/`, {
             refresh: refreshToken,
         });
 
@@ -223,3 +225,76 @@ export const getFavoriteTracks = async () => {
 export const checkProfileExistence = async () => {
     return makeAuthenticatedRequest('get', `${BASE_URL}/profiles/check_or_redirect/`);
 };
+
+// Fetch social posts
+export const fetchSocialPosts = async () => {
+    try {
+      console.log('Fetching social posts...');
+      const response = await axios.get(`${API_BASE}/api/songs/social-posts/`);
+    //   console.log('API Response Data:', response.data); // Log the data
+      return response.data; // Ensure this matches the structure of your API response
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      console.error('Error details:', error.response?.data || error.message);
+      return []; // Return an empty array on error
+    }
+  };
+
+// Create a new social post
+export const createSocialPost = async (formData) => {
+    try {
+      const token = await getAuthToken();
+      const response = await axios.post(
+        `${API_BASE}/api/songs/social-posts/`,
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+          timeout: 30000, // 30-second timeout
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.code === 'ECONNABORTED') {
+        throw new Error('Request timed out. Please try again.');
+      }
+      throw error;
+    }
+  };
+export const likePost = async (postId) => {
+    return makeAuthenticatedRequest('post', `${API_BASE}/api/songs/social-posts/${postId}/like/`);
+};
+
+// Comment on a post
+export const commentOnPost = (postId, content) => {
+    return makeAuthenticatedRequest('post', 
+      `${API_BASE}/api/songs/social-posts/${postId}/comment/`,
+      { content }
+    );
+  };
+
+// Save a post
+export const savePost = async (postId) => {
+    return makeAuthenticatedRequest('post', `${API_BASE}/api/songs/social-posts/${postId}/save/`);
+};
+
+// Share a post
+export const getShareableLink = async (postId) => {
+    return makeAuthenticatedRequest('get', `${API_BASE}/api/songs/social-posts/${postId}/share/`);
+};
+
+// Download post media
+export const downloadPostMedia = async (postId) => {
+    return makeAuthenticatedRequest('get', `${API_BASE}/api/songs/social-posts/${postId}/download/`, null, {
+        responseType: 'blob',
+    });
+};
+// services/api.js
+export const fetchSocialPostComments = (postId) => {
+    return makeAuthenticatedRequest(
+      'get', 
+      `${API_BASE}/api/songs/social-posts/${postId}/comments/`
+    );
+  };

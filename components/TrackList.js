@@ -4,7 +4,7 @@ import { fetchTracks, refreshAuthToken } from "../services/api";
 import TrackItem from "./TrackItem";
 import SearchBar from "./SearchBar";
 
-const API_URL = 'http://192.168.31.138:8000/'; // Replace with your machine's IP
+const API_URL = 'http://192.168.230.138:8000/'; // Replace with your machine's IP
 
 const TrackList = () => {
   const [tracks, setTracks] = useState([]);

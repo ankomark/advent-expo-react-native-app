@@ -13,6 +13,9 @@ import HomePage from './components/HomePage';
 import FavoritesPage from './components/FavoritesPage';
 import CreateProfile from './components/CreateProfile';
 import Header from './components/Header'; // Move the import to the top
+import SocialFeed from './components/SocialFeed';
+import CreatePost from './components/CreatePost';
+import Music from './components/Music';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +30,7 @@ const App = () => {
             >
                 {/* Define your screens with custom header */}
                 <Stack.Screen name="Home" component={HomePageWrapper} />
+                <Stack.Screen name="Music" component={HomePageWrapper} />
                 <Stack.Screen name="Tracks" component={TrackListWrapper} />
                 {/* <Stack.Screen name="Playlists" component={PlaylistWrapper} /> */}
                 <Stack.Screen name="Comments" component={Comments} />
@@ -35,11 +39,11 @@ const App = () => {
                 <Stack.Screen name="Login" component={LoginPage} />
                 <Stack.Screen name="CreateProfile" component={CreateProfile} />
                 <Stack.Screen name="Favorites" component={FavoritesPage} />
-                <Stack.Screen
-                    name="UploadTrack"
-                    component={UploadTrackPage}
-                    options={{ headerShown: true }} // Optional screen-specific options
-                />
+                
+                <Stack.Screen name="UploadTrack" component={UploadTrackPage} options={{ headerShown: true }} />
+                {/* New Social Media Screens */}
+                <Stack.Screen name="SocialFeed" component={SocialFeedWrapper} />
+                <Stack.Screen name="CreatePost" component={CreatePost} options={{ headerShown: true }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
@@ -52,6 +56,14 @@ const HomePageWrapper = ({ navigation }) => (
         <HomePage />
     </View>
 );
+
+const MusicPageWrapper = ({ navigation }) => (
+    <View style={{ flex: 1 }}>
+        <Header navigation={navigation} />
+        <Music />
+    </View>
+);
+
 
 const TrackListWrapper = ({ navigation }) => (
     <View style={{ flex: 1 }}>
@@ -68,5 +80,10 @@ const PlaylistWrapper = ({ navigation }) => (
 );
 
 // Repeat for other screens as needed...
-
+const SocialFeedWrapper = ({ navigation }) => (
+    <View style={{ flex: 1 }}>
+        <Header navigation={navigation} />
+        <SocialFeed navigation={navigation} />
+    </View>
+);
 export default App;

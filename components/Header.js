@@ -1,187 +1,14 @@
 
-
-// import React, { useState, useEffect } from 'react';
-// import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-// import axios from 'axios';
-// import { Ionicons } from '@expo/vector-icons';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// const { width, height } = Dimensions.get('window');
-
-// const BASE_URL = ' http://192.168.31.138:8000/api';
-
-// const Header = () => {
-//     const navigation = useNavigation(); // Keep the useNavigation hook here
-//     const [isAuthenticated, setIsAuthenticated] = useState(false);
-//     const [profile, setProfile] = useState(null);
-
-//     useEffect(() => {
-//         const checkAuth = async () => {
-//             const token = await AsyncStorage.getItem('accessToken');
-//             setIsAuthenticated(!!token);
-//         };
-
-//         checkAuth();
-//     }, []);
-
-//     useEffect(() => {
-//         const checkProfile = async () => {
-//             try {
-//                 const token = await AsyncStorage.getItem('accessToken');
-//                 if (!token) return;
-
-//                 const response = await axios.get(`${BASE_URL}/profiles/has_profile/`, {
-//                     headers: { Authorization: `Bearer ${token}` },
-//                 });
-
-//                 if (!response.data.profile_exists) {
-//                     navigation.navigate('CreateProfile');
-//                 } else {
-//                     const profileResponse = await axios.get(`${BASE_URL}/profiles/me/`, {
-//                         headers: { Authorization: `Bearer ${token}` },
-//                     });
-//                     setProfile(profileResponse.data);
-//                 }
-//             } catch (error) {
-//                 console.error('Error checking profile:', error);
-//             }
-//         };
-
-//         if (isAuthenticated) checkProfile();
-//     }, [isAuthenticated, navigation]);
-
-//     const handleLogout = async () => {
-//         await AsyncStorage.removeItem('accessToken');
-//         await AsyncStorage.removeItem('refreshToken');
-//         setIsAuthenticated(false);
-//         navigation.navigate('Home');
-//     };
-
-//     return (
-//         <View style={styles.header}>
-//             <Image source={require('../assets/logo.png')} style={styles.logo} />
-//             <Text style={styles.title}>SEVENTHDAY ADVENTIST MUSIC</Text>
-//             <View style={styles.navLinks}>
-//                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-//                     <Text style={styles.navLink}>Home</Text>
-//                 </TouchableOpacity>
-//                 {/* <TouchableOpacity onPress={() => navigation.navigate('Playlists')}>
-//                     <Text style={styles.navLink}>Playlists</Text>
-//                 </TouchableOpacity> */}
-//                 <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
-//                 <Ionicons name="star" size={width * 0.06} color="gold" />
-//                     {/* <Text>Favors</Text> */}
-//                 </TouchableOpacity>
-//                 {isAuthenticated ? (
-//                     <>
-//                         <TouchableOpacity onPress={() => navigation.navigate('UploadTrack')}>
-//                             <Text style={styles.navLink}>Upload</Text>
-//                         </TouchableOpacity>
-//                         <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-//                             <Text style={styles.logoutButtonText}>Log Out</Text>
-//                         </TouchableOpacity>
-//                         {profile && profile.picture ? (
-//                             <Image
-//                                 source={{ uri: profile.picture }}
-//                                 style={styles.profilePicture}
-//                             />
-//                         ) : (
-//                             <View style={styles.profilePicturePlaceholder}>
-//                                 <Ionicons name="person" size={width * 0.06} color="#fff" />
-//                             </View>
-//                         )}
-//                     </>
-//                 ) : (
-//                     <>
-//                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-//                             <Text style={styles.navLink}>Sign Up</Text>
-//                         </TouchableOpacity>
-//                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-//                             <Text style={styles.navLink}>Log In</Text>
-//                         </TouchableOpacity>
-//                     </>
-//                 )}
-//             </View>
-//         </View>
-//     );
-// };
-
-// export default Header;
-
-// const styles = StyleSheet.create({
-//     header: {
-//         flexDirection: 'row',
-//         alignItems: 'center',
-//         justifyContent: 'space-around',
-//         backgroundColor:'#1D478B',
-//         padding: width * 0.03,
-//         borderRadius: 10,
-//         marginBottom: height * 0.02,
-//         marginTop: height * 0.04,
-//         flexWrap: 'wrap', // Allows items to wrap on smaller screens
-//     },
-//     logo: {
-//         height: width * 0.08,
-//         width: width * 0.08,
-//         borderRadius: width * 0.04,
-//         marginRight: width * 0.02,
-//     },
-//     title: {
-//         fontSize: width * 0.06,
-//         fontWeight: 'bold',
-//         color: '#FFF',
-//         flex: 1, // Allows title to take available space
-//         textAlign: 'center', // Center the title
-//     },
-//     navLinks: {
-//         flexDirection: 'row',
-//         alignItems: 'center',
-//         gap: width * 0.02,
-//         flexWrap: 'wrap', // Allows navigation links to wrap on smaller screens
-//     },
-//     navLink: {
-//         color: '#FFF',
-//         fontWeight: 'bold',
-//         fontSize: width * 0.035,
-//     },
-//     profilePicture: {
-//         width: width * 0.1,
-//         height: width * 0.1,
-//         borderRadius: width * 0.05,
-//         marginLeft: width * 0.10,
-//     },
-//     profilePicturePlaceholder: {
-//         width: width * 0.1,
-//         height: width * 0.1,
-//         borderRadius: width * 0.05,
-//         backgroundColor: '#ccc',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         marginLeft: width * 0.02,
-//     },
-//     logoutButton: {
-//         borderWidth: 1,
-//         borderColor: 'red',
-//         borderRadius: 5,
-//         padding: width * 0.01,
-//         marginLeft:1,
-//     },
-//     logoutButtonText: {
-//         color: '#FFF',
-//         fontSize: width * 0.035,
-//     },
-// });
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { MaterialIcons } from '@expo/vector-icons';
 const { width, height } = Dimensions.get('window');
 
-const BASE_URL = ' http://192.168.31.138:8000/api';
+const BASE_URL = ' http://192.168.230.138:8000/api';
 
 const Header = () => {
     const navigation = useNavigation();
@@ -244,6 +71,9 @@ const Header = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Ionicons name="home" size={width * 0.06} color="#FFF" />
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('SocialFeed')}>
+        <MaterialIcons name="music-note" size={24} color="white" />
+    </TouchableOpacity>
 
                 {/* Favorites Icon */}
                 <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
