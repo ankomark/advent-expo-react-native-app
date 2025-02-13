@@ -58,11 +58,13 @@ const CreatePost = ({ navigation }) => {
     try {
       const formData = new FormData();
       
+    // Determine the MIME type based on the content type
+    const fileType = contentType === 'video' ? 'video/mp4' : 'image/jpeg';
       // Convert local URI to proper file object
       const file = {
         uri: media.uri,
-        name: media.fileName || `media_${Date.now()}.jpg`,
-        type: 'image/jpeg', // Force correct MIME type
+        name: media.fileName || `media_${Date.now()}.${contentType === 'video' ? 'mp4' : 'jpg'}`,
+      type: fileType, // Set the correct MIME type
       };
   
       formData.append('media_file', file);

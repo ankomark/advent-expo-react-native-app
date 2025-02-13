@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 const { width, height } = Dimensions.get('window');
 
-const BASE_URL = ' http://192.168.230.138:8000/api';
+const BASE_URL = ' http://192.168.246.138:8000/api';
 
 const Header = () => {
     const navigation = useNavigation();
@@ -62,7 +62,7 @@ const Header = () => {
             {/* Top Row: Logo and Title */}
             <View style={styles.topRow}>
                 <Image source={require('../assets/logo.png')} style={styles.logo} />
-                <Text style={styles.title}>SEVENTHDAY ADVENTIST MUSIC</Text>
+                <Text style={styles.title}> ADVENTIST HOME</Text>
             </View>
 
             {/* Bottom Row: Navigation Links */}
@@ -71,7 +71,7 @@ const Header = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Ionicons name="home" size={width * 0.06} color="#FFF" />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('SocialFeed')}>
+                <TouchableOpacity onPress={() => navigation.navigate('Music')}>
         <MaterialIcons name="music-note" size={24} color="white" />
     </TouchableOpacity>
 
@@ -83,10 +83,10 @@ const Header = () => {
                 {/* Conditional Rendering for Authenticated Users */}
                 {isAuthenticated ? (
                     <>
-                        {/* Upload Link */}
+                        {/* Upload Link
                         <TouchableOpacity onPress={() => navigation.navigate('UploadTrack')}>
                             <Text style={styles.navLink}>Upload</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                         {/* Logout Button */}
                         <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>

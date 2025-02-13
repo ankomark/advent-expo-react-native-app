@@ -30,7 +30,7 @@ const App = () => {
             >
                 {/* Define your screens with custom header */}
                 <Stack.Screen name="Home" component={HomePageWrapper} />
-                <Stack.Screen name="Music" component={HomePageWrapper} />
+                <Stack.Screen name="Music" component={MusicPageWrapper} />
                 <Stack.Screen name="Tracks" component={TrackListWrapper} />
                 {/* <Stack.Screen name="Playlists" component={PlaylistWrapper} /> */}
                 <Stack.Screen name="Comments" component={Comments} />

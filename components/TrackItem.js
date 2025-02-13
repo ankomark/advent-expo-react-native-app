@@ -130,6 +130,7 @@ const TrackItem = ({ track }) => {
 
     return (
         <View style={styles.trackItem}>
+             
             <Image source={{ uri: track.cover_image }} style={styles.trackCover} />
             <Text style={styles.trackTitle}>{track.title}</Text>
             <Text style={styles.artistText}>Posted by: {track.artist.username}</Text>
@@ -144,6 +145,7 @@ const TrackItem = ({ track }) => {
                     <FontAwesome name="heart" size={20} color={isFavorite ? 'red' : 'gray'} />
                 </TouchableOpacity>
             </View>
+            
         </View>
     );
 };

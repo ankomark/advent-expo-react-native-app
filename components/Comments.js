@@ -9,7 +9,7 @@ import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 
-const BASE_URL = ' http://192.168.230.138:8000/api';
+const BASE_URL = ' http://192.168.246.138:8000/api';
 
 const Comments = ({ trackId }) => {
     const [comments, setComments] = useState([]);

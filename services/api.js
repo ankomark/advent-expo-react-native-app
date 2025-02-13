@@ -4,10 +4,10 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://192.168.230.138:8000/api/songs'; 
-export const BASE_URL = 'http://192.168.230.138:8000/api';
-export const BASE_URI = 'http://192.168.230.138:8000/';
-export const API_BASE = 'http://192.168.230.138:8000';
+const API_URL = 'http://192.168.246.138:8000/api/songs'; 
+export const BASE_URL = 'http://192.168.246.138:8000/api';
+export const BASE_URI = 'http://192.168.246.138:8000/';
+export const API_BASE = 'http://192.168.246.138:8000';
 
 
 // Function to get the token from AsyncStorage

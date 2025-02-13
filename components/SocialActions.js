@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
-import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 import { likePost, savePost, commentOnPost, downloadPostMedia } from '../services/api';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
@@ -22,8 +22,8 @@ export const LikeButton = ({ postId, initialLikes, isLiked }) => {
 
   return (
     <TouchableOpacity style={styles.actionButton} onPress={handleLike}>
-      <Ionicons 
-        name={liked ? "heart" : "heart-outline"} 
+      <MaterialCommunityIcons 
+        name={liked ? "thumb-up" : "thumb-up-outline"} 
         size={24} 
         color={liked ? "#e74c3c" : "#000"} 
       />

@@ -8,8 +8,8 @@ const HomePage = () => {
   return (
     <View style={styles.container}>
       
-      <TrackList />
-      {/* <SocialFeed/> */}
+      {/* <TrackList /> */}
+      <SocialFeed/>
       <Footer />
     </View>
   );
