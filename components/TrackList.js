@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const API_URL = 'http://192.168.246.138:8000/'; // Replace with your machine's IP
+const API_URL = 'http://192.168.28.138:8000/'; // Replace with your machine's IP
 
 const TrackList = () => {
   const [tracks, setTracks] = useState([]);

@@ -4,10 +4,10 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_URL = 'http://192.168.246.138:8000/api/songs'; 
-export const BASE_URL = 'http://192.168.246.138:8000/api';
-export const BASE_URI = 'http://192.168.246.138:8000/';
-export const API_BASE = 'http://192.168.246.138:8000';
+const API_URL = 'http://192.168.28.138:8000/api/songs'; 
+export const BASE_URL = 'http://192.168.28.138:8000/api';
+export const BASE_URI = 'http://192.168.28.138:8000/';
+export const API_BASE = 'http://192.168.28.138:8000';
 
 
 // Function to get the token from AsyncStorage
@@ -296,5 +296,23 @@ export const fetchSocialPostComments = (postId) => {
     return makeAuthenticatedRequest(
       'get', 
       `${API_BASE}/api/songs/social-posts/${postId}/comments/`
+    );
+  };
+  export const fetchNotifications = async () => {
+    try {
+      const data = await makeAuthenticatedRequest('get', `${API_BASE}/api/notifications/`);
+    //   console.log('Notifications fetched successfully:', data);
+      return data;
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      throw error;
+    }
+  };
+  
+  
+  export const markNotificationAsRead = async (notificationId) => {
+    return makeAuthenticatedRequest('post', 
+      `${API_BASE}/api/notifications/${notificationId}/mark_as_read/`,
+      {}  // Empty body for POST request
     );
   };

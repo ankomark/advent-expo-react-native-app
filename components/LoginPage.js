@@ -122,7 +122,7 @@ const LoginPage = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post(' http://192.168.246.138:8000/api/auth/token/', formData);
+            const response = await axios.post(' http://192.168.28.138:8000/api/auth/token/', formData);
             const { access, refresh } = response.data;
             await AsyncStorage.setItem('accessToken', access);
             await AsyncStorage.setItem('refreshToken', refresh);

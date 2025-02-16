@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -6,9 +5,11 @@ import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
+import NotificationsBell from './NotificationsBell';
+
 const { width, height } = Dimensions.get('window');
 
-const BASE_URL = ' http://192.168.246.138:8000/api';
+const BASE_URL = 'http://192.168.28.138:8000/api';
 
 const Header = () => {
     const navigation = useNavigation();
@@ -20,7 +21,6 @@ const Header = () => {
             const token = await AsyncStorage.getItem('accessToken');
             setIsAuthenticated(!!token);
         };
-
         checkAuth();
     }, []);
 
@@ -61,58 +61,61 @@ const Header = () => {
         <View style={styles.header}>
             {/* Top Row: Logo and Title */}
             <View style={styles.topRow}>
-                <Image source={require('../assets/logo.png')} style={styles.logo} />
-                <Text style={styles.title}> ADVENTIST HOME</Text>
+                <Image 
+                    source={require('../assets/logo.png')} 
+                    style={styles.logo} 
+                />
+                <Text style={styles.title}>ADVENTIST HOME</Text>
             </View>
 
             {/* Bottom Row: Navigation Links */}
             <View style={styles.bottomRow}>
-                {/* Home Icon */}
                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Ionicons name="home" size={width * 0.06} color="#FFF" />
                 </TouchableOpacity>
+
                 <TouchableOpacity onPress={() => navigation.navigate('Music')}>
-        <MaterialIcons name="music-note" size={24} color="white" />
-    </TouchableOpacity>
-
-                {/* Favorites Icon */}
-                <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
-                    <Ionicons name="star" size={width * 0.06} color="gold" />
+                    <MaterialIcons name="music-note" size={24} color="white" />
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Versions')}>
+    <Ionicons name="book-outline" size={24} color="white" />
+</TouchableOpacity>
 
-                {/* Conditional Rendering for Authenticated Users */}
+                <NotificationsBell navigation={navigation} />
+
+                {/* <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
+                    <Ionicons name="star" size={width * 0.06} color="gold" />
+                </TouchableOpacity> */}
+
                 {isAuthenticated ? (
                     <>
-                        {/* Upload Link
-                        <TouchableOpacity onPress={() => navigation.navigate('UploadTrack')}>
-                            <Text style={styles.navLink}>Upload</Text>
-                        </TouchableOpacity> */}
-
-                        {/* Logout Button */}
-                        <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+                        <TouchableOpacity 
+                            onPress={handleLogout} 
+                            style={styles.logoutButton}
+                        >
                             <Text style={styles.logoutButtonText}>Log Out</Text>
                         </TouchableOpacity>
 
-                        {/* Profile Picture */}
-                        {profile && profile.picture ? (
+                        {profile?.picture ? (
                             <Image
                                 source={{ uri: profile.picture }}
                                 style={styles.profilePicture}
                             />
                         ) : (
                             <View style={styles.profilePicturePlaceholder}>
-                                <Ionicons name="person" size={width * 0.06} color="#fff" />
+                                <Ionicons 
+                                    name="person" 
+                                    size={width * 0.06} 
+                                    color="#fff" 
+                                />
                             </View>
                         )}
                     </>
                 ) : (
                     <>
-                        {/* Sign Up Link */}
                         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
                             <Text style={styles.navLink}>Sign Up</Text>
                         </TouchableOpacity>
-
-                        {/* Log In Link */}
                         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                             <Text style={styles.navLink}>Log In</Text>
                         </TouchableOpacity>
@@ -123,8 +126,6 @@ const Header = () => {
     );
 };
 
-export default Header;
-
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#1D478B',
@@ -132,34 +133,36 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: height * 0.02,
         marginTop: height * 0.04,
+        position: 'relative',
     },
     topRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start', // Align logo and title to the left
-        marginBottom: height * 0.02, // Space between top and bottom rows
+        justifyContent: 'flex-start',
+        marginBottom: height * 0.02,
     },
     logo: {
         height: width * 0.08,
         width: width * 0.08,
         borderRadius: width * 0.04,
-        marginRight: width * 0.02, // Space between logo and title
+        marginRight: width * 0.02,
     },
     title: {
-        fontSize: width * 0.045, // Responsive font size
+        fontSize: width * 0.045,
         fontWeight: 'bold',
         color: '#FFF',
     },
     bottomRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between', // Space out navigation links
-        flexWrap: 'wrap', // Allow wrapping on smaller screens
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: 10,
     },
     navLink: {
         color: '#FFF',
         fontWeight: 'bold',
-        fontSize: width * 0.035, // Responsive font size
+        fontSize: width * 0.035,
     },
     profilePicture: {
         width: width * 0.08,
@@ -175,13 +178,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     logoutButton: {
-        borderWidth: 1,
-        borderColor: 'red',
+        // borderWidth: 1,
+        // borderColor: 'red',
         borderRadius: 5,
         padding: width * 0.01,
     },
     logoutButtonText: {
         color: '#FFF',
-        fontSize: width * 0.035, // Responsive font size
+        fontSize: width * 0.035,
     },
 });
+
+export default Header;

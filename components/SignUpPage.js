@@ -22,7 +22,7 @@ const SignUpPage = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(' http://192.168.246.138:8000/api/auth/signup/', formData);
+      await axios.post(' http://192.168.28.138:8000/api/auth/signup/', formData);
       navigation.navigate('Login'); // Redirect to login page after successful sign-up
     } catch (error) {
       setError(error.response?.data?.message || 'Error signing up');

@@ -15,7 +15,7 @@ import { commentOnPost, fetchSocialPostComments } from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const BASE_URL = 'http://192.168.246.138:8000/api';
+const BASE_URL = 'http://192.168.28.138:8000/api';
 const DEFAULT_PROFILE_IMAGE = 'https://via.placeholder.com/150';
 
 const CommentAction = ({ postId, commentCount }) => {

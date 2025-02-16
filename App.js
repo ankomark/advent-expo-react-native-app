@@ -16,8 +16,16 @@ import Header from './components/Header'; // Move the import to the top
 import SocialFeed from './components/SocialFeed';
 import CreatePost from './components/CreatePost';
 import Music from './components/Music';
+import PostDetail from './components/PostDetail'
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import BookScreen from './components/BookScreen';
+// import BooksScreen from './components/BooksScreen';
+
+import VerseScreen from './components/VerseScreen';
+
+
 const Stack = createNativeStackNavigator();
+
 
 const App = () => {
     return (
@@ -43,7 +51,12 @@ const App = () => {
                 <Stack.Screen name="UploadTrack" component={UploadTrackPage} options={{ headerShown: true }} />
                 {/* New Social Media Screens */}
                 <Stack.Screen name="SocialFeed" component={SocialFeedWrapper} />
+                <Stack.Screen name="PostDetail" component={PostDetail} />
                 <Stack.Screen name="CreatePost" component={CreatePost} options={{ headerShown: true }} />
+                
+        <Stack.Screen name="Versions" component={BookScreen}  />
+        {/* <Stack.Screen name="Books" component={BooksScreen} /> */}
+        <Stack.Screen name="Verses" component={VerseScreen} options={{ title: 'Verses' }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
@@ -72,10 +85,10 @@ const TrackListWrapper = ({ navigation }) => (
     </View>
 );
 
-const PlaylistWrapper = ({ navigation }) => (
+const BooksListsPageWrapper = ({ navigation }) => (
     <View style={{ flex: 1 }}>
         <Header navigation={navigation} />
-        <Playlist />
+        <BooksLists />
     </View>
 );
 
